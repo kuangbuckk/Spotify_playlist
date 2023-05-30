@@ -26,6 +26,16 @@ const Track = (props) => {
         );
     }
 
+    /*
+        Search result
+        4.2: Receives an object of track from Tracklist to pass into this component, then in renderAction, if 
+        we click the add button it will provoke addTrack func which is passed down from App component
+
+        Selected tracks
+        4.3: Receives an object of track from Tracklist to pass into this component and isRemoval boolean 
+        then in renderAction if we click the remove button it will provoke removeTrack func which is passed
+        down from App component
+    */
     return (
         <div className="Track">
             <div className="Track-information">

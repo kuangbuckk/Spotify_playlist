@@ -1,4 +1,3 @@
-
 import './css/App.css';
 import React, { useState , useCallback } from 'react';
 import SearchBar from './components/SearchBar';
@@ -20,11 +19,16 @@ function App() {
   /*const search = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);  
   }, []);*/
-
+  
+  //4: search now receives term to pass into Spotify util API fetch to return results
   const search = (term) => {
     Spotify.search(term).then(setSearchResults);
   }
 
+  /*
+    5.2: this func is provoked in Track component and pass in the track object then add it in the
+    setPlaylist setter method for selected songs inserting into playlist if havent added in yet
+  */
   const addTrack = useCallback(
     (track) => {
       if (playlistTracks.some((savedTrack) => savedTrack.id === track.id))
@@ -59,9 +63,12 @@ function App() {
       Bach<span className="highlight"> Jamming</span>
     </h1>
     <div className="App">
-      <SearchBar onSearch={search} />
+      {/*3.1: onSearch receives term value from child component and pass into parent search func*/}
+      <SearchBar onSearch={search}/> 
       <div className="App-playlist">
-        <SearchResult searchResults={searchResults} onAdd={addTrack} />
+        {/*//1.2: insert searchResults array into props and onAdd func*/}
+        <SearchResult searchResults={searchResults} onAdd={addTrack}/> 
+        {/*1.3: pass in playlistName and an array of playlistTracks which contains track objects and other functions*/}
         <Playlist
           playlistName={playlistName}
           playlistTracks={playlistTracks}
