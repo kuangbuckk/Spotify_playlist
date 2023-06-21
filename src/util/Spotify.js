@@ -71,6 +71,33 @@ const Spotify = {
         });
       });
     });
+  },
+
+  getProfile() {
+    const accessToken = Spotify.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+
+    return fetch('https://api.spotify.com/v1/me', {
+      headers: headers,
+      method: 'GET',
+    }).then(response => {return response.json()}
+    ).then(jsonResponse => {
+        if(!jsonResponse){
+          return {};
+        }
+        
+        //profile's schema
+        const profile = {
+          display_name: jsonResponse.display_name,
+          id: jsonResponse.id,
+          type: jsonResponse.type,
+          image_url: jsonResponse.images[0].url,
+          follower_count: jsonResponse.followers.total,
+        }
+
+        return profile;
+      }
+    )
   }
 };
 

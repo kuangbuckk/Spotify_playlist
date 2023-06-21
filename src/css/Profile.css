@@ -1,0 +1,12 @@
+.profile{
+    color: black;
+    background-color: purple;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+.profile-pic{
+    height: 8rem;
+    width: 7rem;
+}

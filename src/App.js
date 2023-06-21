@@ -3,6 +3,7 @@ import React, { useState , useCallback } from 'react';
 import SearchBar from './components/SearchBar';
 import SearchResult from './components/SearchResult';
 import Playlist from './components/Playlist';
+import Profile from './components/Profile';
 
 import Spotify from './util/Spotify';
 
@@ -10,20 +11,29 @@ function App() {
   const [searchResults, setSearchResults] = useState([]); //init empty array of search results
   const [playlistName, setPlaylistName] = useState("New Playlist"); //init default name of the playlist
   const [playlistTracks, setPlaylistTracks] = useState([]); //init empty array of container for selected tracks
+  const [profile, setProfile] = useState({});
+
+  const getProfile = useCallback(()=>{
+    Spotify.getProfile().then(setProfile);
+    console.log('get profile');
+  }, []);
+  window.onload = function() {
+    getProfile();
+  }
 
   /*
     Access Spotify class's search method and pass in song name then 
     return an array of songs and put it into setSearchResult setter method
   */
 
-  /*const search = useCallback((term) => {
+  const search = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);  
-  }, []);*/
+  }, []);
   
   //4: search now receives term to pass into Spotify util API fetch to return results
-  const search = (term) => {
-    Spotify.search(term).then(setSearchResults);
-  }
+  // const search = (term) => {
+  //   Spotify.search(term).then(setSearchResults);
+  // }
 
   /*
     5.2: this func is provoked in Track component and pass in the track object then add it in the
@@ -62,6 +72,11 @@ function App() {
     <h1>
       Bach<span className="highlight"> Jamming</span>
     </h1>
+
+    <div className='profile-information'>
+      <Profile profile={profile}/>
+    </div>
+    
     <div className="App">
       {/*3.1: onSearch receives term value from child component and pass into parent search func*/}
       <SearchBar onSearch={search}/> 

@@ -50,6 +50,22 @@ h2 {
   width: 100%;
 }
 
+.header {
+  background-color: #010c3f;
+}
+
+.user-avatar {
+  float: right;
+  width: 2.5rem;
+  height: 2.15rem;
+  border-radius: 50%;
+  margin-right: 0.4rem; 
+}
+
+.profile-information{
+  color: black;
+}
+
 @media only screen and (max-width: 1020px) {
   .App-playlist {
     align-items: center;
